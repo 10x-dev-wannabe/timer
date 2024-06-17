@@ -5,5 +5,5 @@ In the package.json file, add:<br>
 (in "scripts")<br>
 and make sure "main": "main.js",<br>
 This app is still in development, I will package it when I get more features implemented.<br>
-
+<br>
 Feel free to share your oppinion, share advice, and suggest new features!<br>
