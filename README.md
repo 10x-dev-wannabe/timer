@@ -4,5 +4,5 @@ In the package.json file, add:
 "start": "electron .",
 (in "scripts")
 and make sure "main": "main.js",
-This app is still in development, I will package it awhen I get more features implemented.
+This app is still in development, I will package it when I get more features implemented.
 Feel free to share your oppinion and give advice.
