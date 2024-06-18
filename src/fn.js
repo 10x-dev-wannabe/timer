@@ -123,7 +123,14 @@ resetButton.addEventListener('click', resetTimerFunction);
 confirmButton = document.getElementById('confirm');
 confirmButton.addEventListener('click', setFn);
 
-
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        if (timerIsLive) {
+            pauseTimerFunction();
+        } else {
+            startTimerFunction();
+        }}
+})
 
 // Display data
 logTable = document.getElementById('logtable');
