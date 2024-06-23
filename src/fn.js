@@ -74,6 +74,7 @@ function saveTimeFunction(time) {
 
 function startTimerFunction() {
     if (timerIsLive == false) {
+        timerIsLive = true;
         x = setInterval(function timer() {
             t += 1;
             h = Math.trunc(t/3600);
@@ -88,7 +89,6 @@ function startTimerFunction() {
             // Display
             document.getElementById('time').innerHTML = h +":"+ m +":"+ s;
             
-            timerIsLive = true;
     }, 1000)}
 }
 
