@@ -18,14 +18,14 @@ let year = standardDate.getFullYear();
 day   = (day < 10)   ? "0" + day   : day;
 month = (month < 10) ? "0" + month : month;
 
-date = day + '/' + month + '/' + year + '|';
+date = `${day}/${month}/${year}|`;
 
 
 // Function to set the save file name
 function setFn() {
     //get file name and make the file if it does not exist
     fileName = document.getElementById('fileName').value;    
-    let filePath = __dirname + "/data/" + fileName + '.txt';
+    let filePath = `${__dirname}/data/${fileName}.txt`;
     fs.appendFileSync(filePath, "",
         function(err) {
         if (err) {
@@ -41,8 +41,7 @@ function setFn() {
     console.log(dataArray);
 }
 
-//Function that hanles the save files
-
+// Function that hanles the save files
 function saveTimeFunction(time) {
     let filePath = __dirname + "/data/" + fileName + '.txt';
 
@@ -67,7 +66,6 @@ function saveTimeFunction(time) {
     data = fs.readFileSync(filePath, "ascii");
     console.log(data);
 }
-
 
 
 //Function for starting the timer
