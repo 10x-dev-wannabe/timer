@@ -18,7 +18,7 @@ let year = standardDate.getFullYear();
 day   = (day < 10)   ? "0" + day   : day;
 month = (month < 10) ? "0" + month : month;
 
-date = `${day}/${month}/${year}|`;
+date = `${day}/${month}/${year}@`;
 
 
 // Function to set the save file name
@@ -42,29 +42,28 @@ function setFn() {
 }
 
 // Function that hanles the save files
-function saveTimeFunction(time) {
-    let filePath = __dirname + "/data/" + fileName + '.txt';
+function saveTimeFunction(t) {
+    let filePath = `${__dirname}/data/${fileName}.txt`;
 
     let data = fs.readFileSync(filePath, "ascii");
 
     // Get total time, add curent time
     let totalTime = data.substring(data.lastIndexOf("|") + 1, data.lastIndexOf(" ")) 
-    totalTime = Number(totalTime) + time;
+    totalTime = Number(totalTime) + t;
 
+    // Add current time of day to date
+    let dateTime = new Date().toLocaleTimeString("en-US", {hour12: false,});
 
     // Write to file
-    timeString = time.toString();
-    totalTime = totalTime.toString();
-
-    fs.appendFileSync(filePath, date + totalTime + ' ' + timeString + '\n',
+    fs.appendFileSync(filePath, `${date}${dateTime}|${totalTime} ${t};\n`,
         function(err) {
         if (err) {
             return console.log(err);
         }
         });
     
-    data = fs.readFileSync(filePath, "ascii");
-    console.log(data);
+    //data = fs.readFileSync(filePath, "ascii");
+    //console.log(data);
 }
 
 
