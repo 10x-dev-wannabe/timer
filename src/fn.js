@@ -62,8 +62,6 @@ function saveTimeFunction(t) {
         }
         });
     
-    //data = fs.readFileSync(filePath, "ascii");
-    //console.log(data);
 }
 
 
@@ -105,16 +103,24 @@ function pauseTimerFunction() {
     timerIsLive = false;
 }
 
-
+function startAndStopFunction() {
+    if (timerIsLive) {
+        pauseTimerFunction();
+        startButton.innerHTML = "start";
+        startButton.style.backgroundColor = "#00ff00"; 
+    } else {
+        startTimerFunction();
+        startButton.innerHTML = "stop";
+        startButton.style.backgroundColor = "#ff0000";
+    }
+}
 
 // Get buttons
-stopButton  = document.getElementById('stop');
 startButton = document.getElementById('start');
 resetButton = document.getElementById('reset');
 
 // Make buttons do stuff
-stopButton.addEventListener('click', pauseTimerFunction);
-startButton.addEventListener('click', startTimerFunction);
+startButton.addEventListener('click', startAndStopFunction);
 resetButton.addEventListener('click', resetTimerFunction);
 
 confirmButton = document.getElementById('confirm');
@@ -122,12 +128,8 @@ confirmButton.addEventListener('click', setFn);
 
 document.addEventListener("keydown", (e) => {
     if (e.code === "Space") {
-        if (timerIsLive) {
-            pauseTimerFunction();
-        } else {
-            startTimerFunction();
-        }}
-})
+        startAndStopFunction();
+}})
 
 // Display data
 logTable = document.getElementById('logtable');

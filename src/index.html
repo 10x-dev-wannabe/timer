@@ -9,35 +9,21 @@
 </head>
 
 <body>
-    <h1>
-        Project Timer
-    </h1>
-    <div id="main">
-        <p class="txt" id="time">
-            00:00:00
-        </p>
+    <p id="time">
+        00:00:00
+    </p>
+    <div id="things">
         <button id="start" class="btn">
             start
-        </button>
-        <button id="stop" class="btn">
-            stop
         </button>
         <button id="reset" class="btn">
             reset
         </button><br>
         <form>
-            <input type="text" class="inp" id="fileName" placeholder="Save File name">
-            <button class="inp" style="margin-top: 0%; width:auto" id="confirm" type="button">confirm</button>
+            <input type="text" id="fileName" placeholder="Save File name">
+            <button id="confirm" type="button">confirm</button>
         </form>
-        <table id="logtable">
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Total</th>
-                </tr>
-        </table>
     </div>
-
     <script src="fn.js"></script>
 </body>
 </html>
