@@ -90,6 +90,11 @@ function startTimerFunction() {
 //Function that resets the timer.
 
 function resetTimerFunction() {
+    // change button to start
+    pauseTimerFunction();
+    startButton.innerHTML = "start";
+    startButton.style.backgroundColor = "#00ff00";
+
     if (t != 0 && fileName != ""){
         saveTimeFunction(t);
     }
@@ -115,21 +120,47 @@ function startAndStopFunction() {
     }
 }
 
+// Hide and show menu function
+function showOrHideMenu() {
+    if (saveMenu.style.visibility == "hidden") {
+        saveMenu.style.visibility='visible';
+        menuButton.style.visibility='hidden';
+    } else {
+        saveMenu.style.visibility='hidden';
+        menuButton.style.visibility='visible';
+    }
+}
+
 // Get buttons
 startButton = document.getElementById('start');
 resetButton = document.getElementById('reset');
+menuButton  = document.getElementById('menuButton');
+saveMenu    = document.getElementById('saveMenu');
 
 // Make buttons do stuff
 startButton.addEventListener('click', startAndStopFunction);
 resetButton.addEventListener('click', resetTimerFunction);
+menuButton.addEventListener('click', showOrHideMenu);
 
 confirmButton = document.getElementById('confirm');
 confirmButton.addEventListener('click', setFn);
 
-document.addEventListener("keydown", (e) => {
+// Keyboard shortcuts
+document.addEventListener("keypress", (e) => {
     if (e.code === "Space") {
         startAndStopFunction();
 }})
+
+document.addEventListener("keydown", (e) =>{
+    if (e.key === "R") {
+        resetTimerFunction();
+}})
+
+document.addEventListener("keydown", (e) =>{
+    if (e.key === "M") {
+        showOrHideMenu();
+    }
+})
 
 // Display data
 logTable = document.getElementById('logtable');

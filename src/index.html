@@ -9,20 +9,26 @@
 </head>
 
 <body>
+    <button id="menuButton">
+        Save<br>Menu
+    </button>
+    <div id="saveMenu">
+        <form>
+            <input type="text" id="fileName" placeholder="Save File name"><br>
+            <button id="confirm" type="button">confirm</button>
+        </form>
+    </div>
     <p id="time">
         00:00:00
     </p>
     <div id="things">
-        <button id="start" class="btn">
+        <button class="btn" id="start">
             start
         </button>
-        <button id="reset" class="btn">
+        <button class="btn" id="reset">
             reset
         </button><br>
-        <form>
-            <input type="text" id="fileName" placeholder="Save File name">
-            <button id="confirm" type="button">confirm</button>
-        </form>
+
     </div>
     <script src="fn.js"></script>
 </body>

@@ -4,7 +4,9 @@ body {
 
 .btn {
     color: #ffffff;
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
+    border-width: 10px;
+    border-color:#555555;
     height: 20vh;
     width: 40%;
     font-family: Arial, Helvetica, sans-serif;
@@ -16,12 +18,16 @@ body {
     background-color: #00ff48;
 }
 
+#reset {
+    color: #ff0000;
+}
+
 #fileName {
     color: #ffffff;
     font-size: 3vmin;
     background-color: black;
-    width: 40%;
-    margin-top: 5%
+    width: 95%;
+    margin-top: 5%;
 }
 
 #confirm {
@@ -45,4 +51,22 @@ body {
     bottom: 15%;
     left: 2%;
     right: 2%;
+}
+
+#menuButton {
+    color: #000000;
+    font-size: 100%;
+    width: 50px;
+    height: 50px;
+    font-weight: 900;
+    background-color: #555555;
+    position: absolute;
+}
+
+#saveMenu {
+    position: absolute;
+    width: 20vw;
+    height: 99vh;
+    background-color: #55555588;
+    visibility: hidden;
 }
