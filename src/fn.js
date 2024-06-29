@@ -6,6 +6,7 @@ let h = 0;
 let m = 0;
 let s = 0;
 let fileName = "";
+const files = [];
 
 
 //get date
@@ -25,7 +26,7 @@ date = `${day}/${month}/${year}@`;
 function setFn() {
     //get file name and make the file if it does not exist
     fileName = document.getElementById('fileName').value;    
-    let filePath = `${__dirname}/data/${fileName}.txt`;
+    let filePath = `${__dirname}/data/${fileName}`;
     fs.appendFileSync(filePath, "",
         function(err) {
         if (err) {
@@ -34,7 +35,7 @@ function setFn() {
         });
     // get data and make it into an array
     let data = fs.readFileSync(filePath, "ascii");
-    var dataArray = data.split(/[\s,\n,|]+/);
+    var dataArray = data.split(/[\s,;,|]+/);
     //remove the first and last spaces from array
     dataArray.shift();
     dataArray.pop();
@@ -43,7 +44,7 @@ function setFn() {
 
 // Function that hanles the save files
 function saveTimeFunction(t) {
-    let filePath = `${__dirname}/data/${fileName}.txt`;
+    let filePath = `${__dirname}/data/${fileName}`;
 
     let data = fs.readFileSync(filePath, "ascii");
 
@@ -131,6 +132,14 @@ function showOrHideMenu() {
     }
 }
 
+// Get save files
+function makeFileSelectButtons() {
+    fs.readdirSync(__dirname + '/data/').forEach(file => {
+        files.push(`<button class="fileButtons">${file}</button><br>`)
+    });
+    document.getElementById('fileSelector').innerHTML = files.join('');
+}
+
 // Get buttons
 startButton = document.getElementById('start');
 resetButton = document.getElementById('reset');
@@ -162,5 +171,4 @@ document.addEventListener("keydown", (e) =>{
     }
 })
 
-// Display data
-logTable = document.getElementById('logtable');
+makeFileSelectButtons();

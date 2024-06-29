@@ -34,7 +34,7 @@ body {
     color: #ffffff;
     font-size: 3vmin;
     background-color: black;
-    width: auto;
+    width: 95%;
 }
 
 #time {
@@ -42,6 +42,7 @@ body {
     color: white;
     font-size: 23vw;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
     margin: 0;
 }
 
@@ -65,8 +66,16 @@ body {
 
 #saveMenu {
     position: absolute;
-    width: 20vw;
+    width: 30vh;
     height: 99vh;
     background-color: #55555588;
     visibility: hidden;
+}
+
+.fileButtons {
+    color: #000000;
+    width: 100%;
+    height: 10%;
+    background-color: #dddddd;
+    
 }
