@@ -6,7 +6,7 @@ let h = 0;
 let m = 0;
 let s = 0;
 let fileName = "";
-const files = [];
+var files = [];
 
 
 //get date
@@ -21,9 +21,8 @@ month = (month < 10) ? "0" + month : month;
 
 date = `${day}/${month}/${year}@`;
 
-
-// Function to set the save file name
-function setFn() {
+// Function to create file
+function createFileFunction() {
     //get file name and make the file if it does not exist
     fileName = document.getElementById('fileName').value;    
     let filePath = `${__dirname}/data/${fileName}`;
@@ -33,13 +32,7 @@ function setFn() {
             return console.log(err);
         }
         });
-    // get data and make it into an array
-    let data = fs.readFileSync(filePath, "ascii");
-    var dataArray = data.split(/[\s,;,|]+/);
-    //remove the first and last spaces from array
-    dataArray.shift();
-    dataArray.pop();
-    console.log(dataArray);
+    makeFileSelectButtons();
 }
 
 // Function that hanles the save files
@@ -135,9 +128,10 @@ function showOrHideMenu() {
 // Get save files
 function makeFileSelectButtons() {
     fs.readdirSync(__dirname + '/data/').forEach(file => {
-        files.push(`<button class="fileButtons">${file}</button><br>`)
+        files.push(`<button class="fileButtons">${file}</button><br>`);
     });
     document.getElementById('fileSelector').innerHTML = files.join('');
+    files = [];
 }
 
 // Get buttons
@@ -145,14 +139,13 @@ startButton = document.getElementById('start');
 resetButton = document.getElementById('reset');
 menuButton  = document.getElementById('menuButton');
 saveMenu    = document.getElementById('saveMenu');
+confirmButton = document.getElementById('confirm');
 
 // Make buttons do stuff
 startButton.addEventListener('click', startAndStopFunction);
 resetButton.addEventListener('click', resetTimerFunction);
 menuButton.addEventListener('click', showOrHideMenu);
-
-confirmButton = document.getElementById('confirm');
-confirmButton.addEventListener('click', setFn);
+confirmButton.addEventListener('click', createFileFunction);
 
 // Keyboard shortcuts
 document.addEventListener("keypress", (e) => {
