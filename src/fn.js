@@ -6,7 +6,6 @@ let h = 0;
 let m = 0;
 let s = 0;
 let fileName = "";
-var files = [];
 
 
 //get date
@@ -55,7 +54,7 @@ function saveTimeFunction(t) {
             return console.log(err);
         }
         });
-    
+    console.log(fileName)
 }
 
 
@@ -76,7 +75,7 @@ function startTimerFunction() {
             s = (s < 10) ? "0" + s : s;
             
             // Display
-            document.getElementById('time').innerHTML = h +":"+ m +":"+ s;
+            document.getElementById('time').innerHTML = `${h}:${m}:${s}`;
             
     }, 1000)}
 }
@@ -127,11 +126,17 @@ function showOrHideMenu() {
 
 // Get save files
 function makeFileSelectButtons() {
+    document.getElementById('fileSelector').innerHTML = '';
     fs.readdirSync(__dirname + '/data/').forEach(file => {
-        files.push(`<button class="fileButtons">${file}</button><br>`);
+    document.getElementById('fileSelector').innerHTML += 
+        `<button class="fileButtons" id=${file}File>${file}</button><br>`;
     });
-    document.getElementById('fileSelector').innerHTML = files.join('');
-    files = [];
+    // Add event listeners
+    let fileButtons = document.getElementsByClassName('fileButtons')
+    for (let i = 0; i < fileButtons.length; i++) {
+        let button = fileButtons[i];
+        button.addEventListener('click', () => fileName = button.innerHTML)
+    }
 }
 
 // Get buttons
