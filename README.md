@@ -4,7 +4,7 @@ inside the timer directory run:
 npm install --save-dev electron<br>
 npm init<br>
 In the package.json file:<br>
--change the description to ""
+-change the description to ""<br>
 -add "start": "electron ." (in "scripts")<br>
 and make sure "main": "main.js",<br>
 This app is still in development, I will package it when I get more features implemented.<br>
