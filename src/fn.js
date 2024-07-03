@@ -135,7 +135,14 @@ function makeFileSelectButtons() {
     let fileButtons = document.getElementsByClassName('fileButtons')
     for (let i = 0; i < fileButtons.length; i++) {
         let button = fileButtons[i];
-        button.addEventListener('click', () => fileName = button.innerHTML)
+        button.addEventListener('click', () => {
+            for(let i = 0; i < fileButtons.length; i++) {
+                let button = fileButtons[i];
+                button.style.backgroundColor = '#bbbbbb'
+                }
+            fileName = button.innerHTML;
+            button.style.backgroundColor = '#aaeeaa';
+        })
     }
 }
 
