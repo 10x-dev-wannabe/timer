@@ -7,6 +7,8 @@ In the package.json file:<br>
 -change the description to ""<br>
 -add "start": "electron ." (in "scripts")<br>
 and make sure "main": "main.js",<br>
+And now run $ npm start and follow the instructions there to set up electron.js<br>
+now run npm start again and it should work.<br>
 This app is still in development, I will package it when I get more features implemented.<br>
 <br>
 Feel free to share your oppinion, share advice, and suggest new features!<br>
