@@ -31,10 +31,26 @@ body {
     padding-top: 0vh;
 }
 
+#deleteFileName {
+    color: #ffffff;
+    font-size: 3vmin;
+    background-color: black;
+    width: 95%;
+    margin-top: 0vh;
+    padding-top: 0vh;
+}
+
 #confirm {
     color: #ffffff;
     font-size: 3vmin;
     background-color: black;
+    width: 95%;
+}
+
+#deleteConfirm {
+    color: #ffffff;
+    font-size: 3vmin;
+    background-color: #aa0404;
     width: 95%;
 }
 

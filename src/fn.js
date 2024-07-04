@@ -34,6 +34,14 @@ function createFileFunction() {
     makeFileSelectButtons();
 }
 
+// Function to delete file
+function deleteFileFunction() {
+    let deleteFile = document.getElementById('deleteFileName').value;
+    let filePath = `${__dirname}/data/${deleteFile}`;
+    fs.unlink(filePath, makeFileSelectButtons)
+}
+
+
 // Function that hanles the save files
 function saveTimeFunction(t) {
     let filePath = `${__dirname}/data/${fileName}`;
@@ -152,13 +160,14 @@ resetButton = document.getElementById('reset');
 menuButton  = document.getElementById('menuButton');
 saveMenu    = document.getElementById('saveMenu');
 confirmButton = document.getElementById('confirm');
+deleteConfirm = document.getElementById('deleteConfirm');
 
 // Make buttons do stuff
 startButton.addEventListener('click', startAndStopFunction);
 resetButton.addEventListener('click', resetTimerFunction);
 menuButton.addEventListener('click', showOrHideMenu);
 confirmButton.addEventListener('click', createFileFunction);
-
+deleteConfirm.addEventListener('click', deleteFileFunction);
 // Keyboard shortcuts
 document.addEventListener("keypress", (e) => {
     if (e.code === "Space") {
