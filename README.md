@@ -12,3 +12,8 @@ now run npm start again and it should work.<br>
 This app is still in development, I will package it when I get more features implemented.<br>
 <br>
 Feel free to share your oppinion, share advice, and suggest new features!<br>
+<br>
+Keyboard shortcuts:<br>
+start/stop timer: space<br>
+reset timer     : shift + r<br>
+open menu       : shift + m<br>
