@@ -20,51 +20,9 @@ month = (month < 10) ? "0" + month : month;
 
 date = `${day}/${month}/${year}@`;
 
-// Function to create file
-function createFileFunction() {
-    //get file name and make the file if it does not exist
-    fileName = document.getElementById('fileName').value;    
-    let filePath = `${__dirname}/data/${fileName}`;
-    fs.appendFileSync(filePath, "",
-        function(err) {
-        if (err) {
-            return console.log(err);
-        }
-        });
-    makeFileSelectButtons();
-}
-
-// Function to delete file
-function deleteFileFunction() {
-    let deleteFile = document.getElementById('deleteFileName').value;
-    let filePath = `${__dirname}/data/${deleteFile}`;
-    fs.unlink(filePath, makeFileSelectButtons)
-}
-
-
-// Function that hanles the save files
-function saveTimeFunction(t) {
-    let filePath = `${__dirname}/data/${fileName}`;
-
-    let data = fs.readFileSync(filePath, "ascii");
-
-    // Get total time, add curent time
-    let totalTime = data.substring(data.lastIndexOf("|") + 1, data.lastIndexOf(" ")) 
-    totalTime = Number(totalTime) + t;
-
-    // Add current time of day to date
-    let dateTime = new Date().toLocaleTimeString("en-US", {hour12: false,});
-
-    // Write to file
-    fs.appendFileSync(filePath, `${date}${dateTime}|${totalTime} ${t};\n`,
-        function(err) {
-        if (err) {
-            return console.log(err);
-        }
-        });
-    console.log(fileName)
-}
-
+//---------------//
+//TIMER FUNCTIONS//
+//---------------//
 
 //Function for starting the timer
 
@@ -109,6 +67,7 @@ function pauseTimerFunction() {
     timerIsLive = false;
 }
 
+// Make start and pause into the same button
 function startAndStopFunction() {
     if (timerIsLive) {
         pauseTimerFunction();
@@ -121,18 +80,58 @@ function startAndStopFunction() {
     }
 }
 
-// Hide and show menu function
-function showOrHideMenu() {
-    if (saveMenu.style.visibility == "hidden") {
-        saveMenu.style.visibility='visible';
-        menuButton.style.visibility='hidden';
-    } else {
-        saveMenu.style.visibility='hidden';
-        menuButton.style.visibility='visible';
-    }
+//-----------------------------//
+//SAVE FILES AND MENU FUNCTIONS//
+//-----------------------------//
+
+// Function that hanles the save files
+function saveTimeFunction(t) {
+    let filePath = `${__dirname}/data/${fileName}`;
+
+    let data = fs.readFileSync(filePath, "ascii");
+
+    // Get total time, add curent time
+    let totalTime = data.substring(data.lastIndexOf("|") + 1, data.lastIndexOf(" ")) ;
+    totalTime = Number(totalTime) + t;
+
+    // Add current time of day to date
+    let dateTime = new Date().toLocaleTimeString("en-US", {hour12: false,});
+
+    // Write to file
+    fs.appendFileSync(filePath, `${date}${dateTime}|${totalTime} ${Math.trunc(t/60)};\n`,
+        function(err) {
+        if (err) {
+            return console.log(err);
+        }
+        });
+    console.log(fileName);
 }
 
-// Get save files
+// Function to create file
+function createFileFunction() {
+    //get file name and make the file if it does not exist
+    fileName = document.getElementById('fileName').value;    
+    let filePath = `${__dirname}/data/${fileName}`;
+    fs.appendFileSync(filePath, "",
+        function(err) {
+        if (err) {
+            return console.log(err);
+        }
+        });
+    document.getElementById('fileName').value = '';
+    makeFileSelectButtons();
+}
+
+// Function to delete file
+function deleteFileFunction() {
+    let deleteFile = document.getElementById('deleteFileName').value;
+    document.getElementById('deleteFileName').value = "";
+    let filePath = `${__dirname}/data/${deleteFile}`;
+    fs.unlink(filePath, makeFileSelectButtons);
+}
+
+
+// Make save files and buttons
 function makeFileSelectButtons() {
     document.getElementById('fileSelector').innerHTML = '';
     fs.readdirSync(__dirname + '/data/').forEach(file => {
@@ -153,6 +152,23 @@ function makeFileSelectButtons() {
         })
     }
 }
+makeFileSelectButtons();
+
+
+// Hide and show menu function
+function showOrHideMenu() {
+    if (saveMenu.style.visibility == "hidden") {
+        saveMenu.style.visibility='visible';
+        menuButton.style.visibility='hidden';
+    } else {
+        saveMenu.style.visibility='hidden';
+        menuButton.style.visibility='visible';
+    }
+}
+
+//---------------------//
+//BUTTONS AND SHORTCUTS//
+//---------------------//
 
 // Get buttons
 startButton = document.getElementById('start');
@@ -184,5 +200,3 @@ document.addEventListener("keydown", (e) =>{
         showOrHideMenu();
     }
 })
-
-makeFileSelectButtons();
