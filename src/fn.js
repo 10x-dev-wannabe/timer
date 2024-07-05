@@ -1,3 +1,4 @@
+const { isUtf8 } = require('buffer');
 const fs = require('fs');
 
 let timerIsLive = false;
@@ -134,24 +135,43 @@ function deleteFileFunction() {
 // Make save files and buttons
 function makeFileSelectButtons() {
     document.getElementById('fileSelector').innerHTML = '';
-    fs.readdirSync(__dirname + '/data/').forEach(file => {
+    fs.readdirSync(`${__dirname}/data/`).forEach(file => {
     document.getElementById('fileSelector').innerHTML += 
-        `<button class="fileButtons" id=${file}File>${file}</button><br>`;
+        `<button class="fileButtons" id=${file}File>${file}</button>
+        <button class="historyButtons" id="${file}History">History</button><br>`;
     });
     // Add event listeners
     let fileButtons = document.getElementsByClassName('fileButtons')
+    let historyButtons = document.getElementsByClassName('historyButtons')
     for (let i = 0; i < fileButtons.length; i++) {
         let button = fileButtons[i];
         button.addEventListener('click', () => {
             for(let i = 0; i < fileButtons.length; i++) {
                 let button = fileButtons[i];
-                button.style.backgroundColor = '#bbbbbb'
+                button.style.backgroundColor = '#bbbbbb';
                 }
-            fileName = button.innerHTML;
+            fileName = button.textContent;
             button.style.backgroundColor = '#aaeeaa';
         })
+        let historyButton = historyButtons[i];
+        historyButton.addEventListener('click', () => {
+            let logDisplay = document.getElementById('logDisplay');
+            let file = button.textContent;
+            if (logDisplay.style.visibility =='hidden') {
+                logDisplay.style.visibility = 'visible';
+                logDisplay.innerHTML = makeDisplayData(file);
+            } else {
+                logDisplay.style.visibility = 'hidden';   
+            }
+        })
+        
     }
 }
+
+function makeDisplayData(file) {
+    data = fs.readFileSync(`${__dirname}/data/${file}`, 'utf8');
+}
+
 makeFileSelectButtons();
 
 
@@ -159,10 +179,8 @@ makeFileSelectButtons();
 function showOrHideMenu() {
     if (saveMenu.style.visibility == "hidden") {
         saveMenu.style.visibility='visible';
-        menuButton.style.visibility='hidden';
     } else {
         saveMenu.style.visibility='hidden';
-        menuButton.style.visibility='visible';
     }
 }
 
