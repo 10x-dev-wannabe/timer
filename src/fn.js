@@ -99,7 +99,7 @@ function saveTimeFunction(t) {
     let dateTime = new Date().toLocaleTimeString("en-US", {hour12: false,});
 
     // Write to file
-    fs.appendFileSync(filePath, `${date}${dateTime}|${totalTime} ${Math.trunc(t/60)};\n`,
+    fs.appendFileSync(filePath, `\n${date}${dateTime}|${totalTime} ${Math.trunc(t/60)}`,
         function(err) {
         if (err) {
             return console.log(err);
@@ -158,8 +158,8 @@ function makeFileSelectButtons() {
             let logDisplay = document.getElementById('logDisplay');
             let file = button.textContent;
             if (logDisplay.style.visibility =='hidden') {
+                makeDisplayData(file, logDisplay);
                 logDisplay.style.visibility = 'visible';
-                logDisplay.innerHTML = makeDisplayData(file);
             } else {
                 logDisplay.style.visibility = 'hidden';   
             }
@@ -168,9 +168,22 @@ function makeFileSelectButtons() {
     }
 }
 
-function makeDisplayData(file) {
-    data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
-    return data;
+function makeDisplayData(file, logDisplay) {
+    let html = '<table id=displayTable><tr><th>Date</th><th>Time</th><th>Project</th><th>Session</th>';
+    let data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
+    data = data.replace(`\n`, '');
+    let sessions = data.split('\n');
+    for (let i = 0; sessions.length; i++) {
+        let sesh = sessions[i].split(/[\n+@+|+ ]/);
+        let date = sesh[0];
+        let time = sesh[1];
+        let total= sesh[2];
+        let sesht= sesh[3];
+        console.log("whomp")
+    }
+    console.log("whomp")
+
+    logDisplay.innerHTML = "html";
 }
 
 makeFileSelectButtons();
