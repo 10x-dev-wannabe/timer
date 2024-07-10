@@ -87,7 +87,7 @@ function startAndStopFunction() {
 
 // Function that hanles the save files
 function saveTimeFunction(t) {
-    let filePath = `${__dirname}/data/${fileName}`;
+    let filePath = `${process.cwd()}/data/${fileName}`;
 
     let data = fs.readFileSync(filePath, "ascii");
 
@@ -112,7 +112,7 @@ function saveTimeFunction(t) {
 function createFileFunction() {
     //get file name and make the file if it does not exist
     fileName = document.getElementById('fileName').value;    
-    let filePath = `${__dirname}/data/${fileName}`;
+    let filePath = `${process.cwd()}/data/${fileName}`;
     fs.appendFileSync(filePath, "",
         function(err) {
         if (err) {
@@ -127,7 +127,7 @@ function createFileFunction() {
 function deleteFileFunction() {
     let deleteFile = document.getElementById('deleteFileName').value;
     document.getElementById('deleteFileName').value = "";
-    let filePath = `${__dirname}/data/${deleteFile}`;
+    let filePath = `${process.cwd()}/data/${deleteFile}`;
     fs.unlink(filePath, makeFileSelectButtons);
 }
 
@@ -135,7 +135,7 @@ function deleteFileFunction() {
 // Make save files and buttons
 function makeFileSelectButtons() {
     document.getElementById('fileSelector').innerHTML = '';
-    fs.readdirSync(`${__dirname}/data/`).forEach(file => {
+    fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
     document.getElementById('fileSelector').innerHTML += 
         `<button class="fileButtons" id=${file}File>${file}</button>
         <button class="historyButtons" id="${file}History">History</button><br>`;
@@ -169,7 +169,8 @@ function makeFileSelectButtons() {
 }
 
 function makeDisplayData(file) {
-    data = fs.readFileSync(`${__dirname}/data/${file}`, 'utf8');
+    data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
+    return data;
 }
 
 makeFileSelectButtons();
