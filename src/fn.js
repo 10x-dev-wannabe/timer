@@ -87,7 +87,7 @@ function startAndStopFunction() {
 
 // Function that hanles the save files
 function saveTimeFunction(t) {
-    let filePath = `${process.cwd()}/data/${fileName}`;
+    let filePath = `${process.cwd()}/data/          ${fileName}`;
 
     let data = fs.readFileSync(filePath, "ascii");
 
