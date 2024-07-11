@@ -132,58 +132,28 @@ function deleteFileFunction() {
 }
 
 
-// Make save files and buttons
+// Make save file buttons
 function makeFileSelectButtons() {
     document.getElementById('fileSelector').innerHTML = '';
     fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
-    document.getElementById('fileSelector').innerHTML += 
-        `<button class="fileButtons" id=${file}File>${file}</button>
-        <button class="historyButtons" id="${file}History">History</button><br>`;
+        document.getElementById('fileSelector').innerHTML += 
+            `<button class="fileButtons" id=${file}File>${file}</button>
+            <button class="historyButtons" id="${file}History">History</button><br>`;
     });
-    // Add event listeners
-    let fileButtons = document.getElementsByClassName('fileButtons')
-    let historyButtons = document.getElementsByClassName('historyButtons')
-    for (let i = 0; i < fileButtons.length; i++) {
-        let button = fileButtons[i];
-        button.addEventListener('click', () => {
-            for(let i = 0; i < fileButtons.length; i++) {
-                let button = fileButtons[i];
-                button.style.backgroundColor = '#bbbbbb';
-                }
-            fileName = button.textContent;
-            button.style.backgroundColor = '#aaeeaa';
-        })
-        let historyButton = historyButtons[i];
-        historyButton.addEventListener('click', () => {
-            let logDisplay = document.getElementById('logDisplay');
-            let file = button.textContent;
-            if (logDisplay.style.visibility =='hidden') {
-                makeDisplayData(file, logDisplay);
+    logDisplay = document.getElementById('logDisplay');
+    fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
+        document.getElementById(`${file}File`).addEventListener('click', () => {
+            document.getElementById('fileSelector').querySelectorAll('.fileButtons').forEach(button => button.style.backgroundColor = '#bbbbbb');
+            if (fileName != file) {
+                fileName = file;
+                document.getElementById(`${file}File`).style.backgroundColor = '#99ff99';
                 logDisplay.style.visibility = 'visible';
             } else {
-                logDisplay.style.visibility = 'hidden';   
-            }
-        })
-        
-    }
-}
-
-function makeDisplayData(file, logDisplay) {
-    let html = '<table id=displayTable><tr><th>Date</th><th>Time</th><th>Project</th><th>Session</th>';
-    let data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
-    data = data.replace(`\n`, '');
-    let sessions = data.split('\n');
-    for (let i = 0; sessions.length; i++) {
-        let sesh = sessions[i].split(/[\n+@+|+ ]/);
-        let date = sesh[0];
-        let time = sesh[1];
-        let total= sesh[2];
-        let sesht= sesh[3];
-        console.log("whomp")
-    }
-    console.log("whomp")
-
-    logDisplay.innerHTML = "html";
+                fileName = '';
+                logDisplay.style.visibility = 'hidden';
+            };
+        });
+    });
 }
 
 makeFileSelectButtons();
