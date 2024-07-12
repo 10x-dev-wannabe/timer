@@ -12,7 +12,7 @@ let fileName = "";
 //get date
 standardDate = new Date();
 let day = standardDate.getDate();
-let month = standardDate.getMonth();
+let month = standardDate.getMonth()+1;
 let year = standardDate.getFullYear();
 
 //format date as dd/mm/yyyy
@@ -93,7 +93,7 @@ function saveTimeFunction(t) {
 
     // Get total time, add curent time
     let totalTime = data.substring(data.lastIndexOf("|") + 1, data.lastIndexOf(" ")) ;
-    totalTime = Number(totalTime) + t;
+    totalTime = Number(totalTime) + Math.trunc(t/60);
 
     // Add current time of day to date
     let dateTime = new Date().toLocaleTimeString("en-US", {hour12: false,});
@@ -134,27 +134,44 @@ function deleteFileFunction() {
 
 // Make save file buttons
 function makeFileSelectButtons() {
+    // Make buttons
     document.getElementById('fileSelector').innerHTML = '';
     fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
         document.getElementById('fileSelector').innerHTML += 
-            `<button class="fileButtons" id=${file}File>${file}</button>
-            <button class="historyButtons" id="${file}History">History</button><br>`;
+            `<button class="fileButtons" id=${file}File>${file}</button><br>`
     });
+    document.getElementById('fileSelector').innerHTML += '<button id="logButton">Show Logs</button><br>';
     logDisplay = document.getElementById('logDisplay');
+    // Add event listeners
     fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
         document.getElementById(`${file}File`).addEventListener('click', () => {
             document.getElementById('fileSelector').querySelectorAll('.fileButtons').forEach(button => button.style.backgroundColor = '#bbbbbb');
             if (fileName != file) {
                 fileName = file;
                 document.getElementById(`${file}File`).style.backgroundColor = '#99ff99';
-                logDisplay.style.visibility = 'visible';
             } else {
                 fileName = '';
                 logDisplay.style.visibility = 'hidden';
             };
-        });
-    });
-}
+            // Fill the Log Display
+            logDisplay.innerHTML = makeLogs(file);
+    })})
+    // Toggle Log Display
+    document.getElementById('logButton').addEventListener('click', () => {
+        if (logDisplay.style.visibility != 'visible' && fileName != '') {
+            logDisplay.style.visibility = 'visible';   
+        } else {
+            logDisplay.style.visibility = 'hidden';
+        }});
+};
+function makeLogs(file) {
+    let data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
+    let output = '<table>';
+    data = data.split('\n');
+    data.forEach(sesh => {
+    output += '</table>';
+    })
+};
 
 makeFileSelectButtons();
 

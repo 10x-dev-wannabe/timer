@@ -133,10 +133,10 @@ body {
     font-weight: 800;
 }
 
-.historyButtons {
-    float: right;
+#logButton {
     color: #dddddd;
     background-color: #000000;
+    width: 25vh;
     height: 5vh;
-    width: 5vh;
+    font-size: 2vmin;
 }
