@@ -2,4 +2,4 @@
 /package.json
 /package-lock.json
 /data/*
-/data/.dummyFile
+!/data/dummyFile
