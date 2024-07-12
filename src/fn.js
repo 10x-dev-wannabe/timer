@@ -105,7 +105,8 @@ function saveTimeFunction(t) {
             return console.log(err);
         }
         });
-    console.log(fileName);
+    // Refresh log    
+    logDisplay.innerHTML = makeLogs(fileName);
 }
 
 // Function to create file
@@ -155,6 +156,7 @@ function makeFileSelectButtons() {
             };
             // Fill the Log Display
             logDisplay.innerHTML = makeLogs(file);
+            makeLogs(file)
     })})
     // Toggle Log Display
     document.getElementById('logButton').addEventListener('click', () => {
@@ -166,11 +168,19 @@ function makeFileSelectButtons() {
 };
 function makeLogs(file) {
     let data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
-    let output = '<table>';
+    let output = '<table id="logTable"><tr><th>Date</th><th>Time</th><th>Project</th><th>Session</th></tr>';
     data = data.split('\n');
+    data.shift();
     data.forEach(sesh => {
-    output += '</table>';
-    })
+        let date    = sesh.split(/[\n@]/)[0];
+        let time    = sesh.split(/[@|]/)[1];
+        let session = sesh.split(/[\s\n]/)[1];
+        let project = sesh.split(/[|\s]/)[1];
+        project = `${Math.trunc(project/60)}:${(project%60) ? '0' + project%60 : project}`
+        output += `<tr><td>${date}</td><td>${time}</td><td>${project}</td><td>${session}</td></tr>`
+    });
+    output += "</table>";
+    return output;
 };
 
 makeFileSelectButtons();
