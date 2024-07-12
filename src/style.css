@@ -96,9 +96,10 @@ body {
 }
 
 #logDisplay {
-    background-color: #e62727dd;
+    background-color: #222222dd;
     height: min-content;
-    width:90vmin;
+    max-height: 60vh;
+    width:min-content;
     position: absolute;
     margin: auto;
     top: 0;
@@ -140,3 +141,19 @@ body {
     height: 5vh;
     font-size: 2vmin;
 }
+
+#logTable, th, td {
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:2.5vmin;
+    border:0.2vh solid #00ff00cc;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #444444dd;
+  }
