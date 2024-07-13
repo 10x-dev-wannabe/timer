@@ -23,14 +23,14 @@
 
         </div>
 
-        <form>
+        <form onsubmit="createFileFunction();return false">
             <p class="saveMenuText" style="padding-top: 1vh;">
                 Create New File:
             </p>
             <input type="text" id="fileName" placeholder="New File name"><br>
             <button id="confirm" type="button">confirm</button>
         </form>
-        <form>
+        <form onsubmit="deleteFileFunction();return false">
             <p class="saveMenuText" style="padding-top: 1vh;">
                 Delete File:
             </p>

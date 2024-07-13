@@ -213,6 +213,8 @@ resetButton.addEventListener('click', resetTimerFunction);
 menuButton.addEventListener('click', showOrHideMenu);
 confirmButton.addEventListener('click', createFileFunction);
 deleteConfirm.addEventListener('click', deleteFileFunction);
+
+
 // Keyboard shortcuts
 document.addEventListener("keypress", (e) => {
     if (e.code === "Space") {

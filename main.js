@@ -25,7 +25,7 @@ app.on('window-all-closed', () => {
   } 
 })
 
-
+/*
 app.on('browser-window-focus', function () {
   globalShortcut.register("CommandOrControl+R", () => {
       console.log("CommandOrControl+R is pressed: Shortcut Disabled");
@@ -40,3 +40,4 @@ app.on('browser-window-blur', function () {
   globalShortcut.unregister('CommandOrControl+R');
   globalShortcut.unregister('F5');
 });
+*/
