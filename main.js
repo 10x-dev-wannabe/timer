@@ -9,7 +9,8 @@ const createWindow = () => {
     webPreferences: { 
       nodeIntegration: true,
       contextIsolation: false,
-    } 
+    },
+    icon: 'timerIcon.png'
   })
 
   win.loadFile('src/index.html')

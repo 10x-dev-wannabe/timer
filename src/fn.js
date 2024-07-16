@@ -176,8 +176,9 @@ function makeLogs(file) {
         let time    = sesh.split(/[@|]/)[1];
         let session = sesh.split(/[\s\n]/)[1];
         let project = sesh.split(/[|\s]/)[1];
-        project = `${Math.trunc(project/60)}:${(project%60) ? '0' + project%60 : project}`
-        output += `<tr><td>${date}</td><td>${time}</td><td>${project}</td><td>${session}</td></tr>`
+        let minutes = project%60;
+        project = `${Math.trunc(project/60)}:${(minutes < 10) ? '0' + minutes : minutes}`;
+        output += `<tr><td>${date}</td><td>${time}</td><td>${project}</td><td>${session}</td></tr>`;
     });
     output += "</table>";
     return output;
