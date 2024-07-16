@@ -1,6 +1,26 @@
 body {
     background-color: #000000;
+    overflow: hidden;
 }
+ /* width */
+ ::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #aaaaaa;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #5b5;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  } 
 
 .btn {
     color: #ffffff;
@@ -142,18 +162,19 @@ body {
     font-size: 2vmin;
 }
 
-#logTable, th, td {
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:2.5vmin;
-    border:0.2vh solid #00ff00cc;
+
+#logTable {
     border-collapse: collapse;
 }
 
 th, td {
     padding: 10px;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:2.5vmin;
+    border:0.2vh solid #00ff00cc;
 }
 
 tr:nth-child(even) {
     background-color: #444444dd;
-  }
+}
