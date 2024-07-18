@@ -10,7 +10,7 @@ const createWindow = () => {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    icon: 'timerIcon.png'
+    icon: 'src/timerIcon.png'
   })
 
   win.loadFile('src/index.html')

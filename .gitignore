@@ -3,3 +3,5 @@
 /package-lock.json
 /data/*
 !/data/dummyFile
+/out/
+/forge.config.js

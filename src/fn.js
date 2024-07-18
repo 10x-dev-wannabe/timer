@@ -8,6 +8,9 @@ let m = 0;
 let s = 0;
 let fileName = "";
 
+if (!fs.existsSync(`${process.cwd()}/data`)){
+    fs.mkdirSync(`${process.cwd()}/data`);
+}                   
 
 //get date
 standardDate = new Date();
