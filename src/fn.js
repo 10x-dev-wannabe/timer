@@ -1,5 +1,15 @@
-const { isUtf8 } = require('buffer');
+//const { isUtf8 } = require('buffer');
+const {electron, ipcRenderer} = require('electron');
+const path = require('path')
 const fs = require('fs');
+
+console.log(1)
+ipcRenderer.on('whomp', (evt, message) => {
+    logPath = `${message}/data/`;
+    console.log(logPath);
+})
+console.log(2)
+
 
 let timerIsLive = false;
 let t = 0;
@@ -7,10 +17,6 @@ let h = 0;
 let m = 0;
 let s = 0;
 let fileName = "";
-
-if (!fs.existsSync(`${process.cwd()}/data`)){
-    fs.mkdirSync(`${process.cwd()}/data`);
-}                   
 
 //get date
 standardDate = new Date();
@@ -90,7 +96,7 @@ function startAndStopFunction() {
 
 // Function that hanles the save files
 function saveTimeFunction(t) {
-    let filePath = `${process.cwd()}/data/${fileName}`;
+    let filePath = `${logPath}${fileName}`;
 
     let data = fs.readFileSync(filePath, "ascii");
 
@@ -116,7 +122,7 @@ function saveTimeFunction(t) {
 function createFileFunction() {
     //get file name and make the file if it does not exist
     fileName = document.getElementById('fileName').value;    
-    let filePath = `${process.cwd()}/data/${fileName}`;
+    let filePath = `${logPath}${fileName}`;
     fs.appendFileSync(filePath, "",
         function(err) {
         if (err) {
@@ -131,23 +137,27 @@ function createFileFunction() {
 function deleteFileFunction() {
     let deleteFile = document.getElementById('deleteFileName').value;
     document.getElementById('deleteFileName').value = "";
-    let filePath = `${process.cwd()}/data/${deleteFile}`;
+    let filePath = `${logPath}${deleteFile}`;
     fs.unlink(filePath, makeFileSelectButtons);
 }
 
 
 // Make save file buttons
 function makeFileSelectButtons() {
+    if (!fs.existsSync(logPath)){
+        fs.mkdirSync(logPath);
+    }
     // Make buttons
     document.getElementById('fileSelector').innerHTML = '';
-    fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
+    fs.readdirSync(`${logPath}`).forEach(file => {
         document.getElementById('fileSelector').innerHTML += 
             `<button class="fileButtons" id=${file}File>${file}</button><br>`
     });
     document.getElementById('fileSelector').innerHTML += '<button id="logButton">Show Logs</button><br>';
     logDisplay = document.getElementById('logDisplay');
     // Add event listeners
-    fs.readdirSync(`${process.cwd()}/data/`).forEach(file => {
+    try {
+    fs.readdirSync(`${logPath}`).forEach(file => {
         document.getElementById(`${file}File`).addEventListener('click', () => {
             document.getElementById('fileSelector').querySelectorAll('.fileButtons').forEach(button => button.style.backgroundColor = '#bbbbbb');
             if (fileName != file) {
@@ -161,6 +171,7 @@ function makeFileSelectButtons() {
             logDisplay.innerHTML = makeLogs(file);
             makeLogs(file)
     })})
+    } catch {}
     // Toggle Log Display
     document.getElementById('logButton').addEventListener('click', () => {
         if (logDisplay.style.visibility != 'visible' && fileName != '') {
@@ -170,7 +181,7 @@ function makeFileSelectButtons() {
         }});
 };
 function makeLogs(file) {
-    let data = fs.readFileSync(`${process.cwd()}/data/${file}`, 'utf8');
+    let data = fs.readFileSync(`${logPath}${file}`, 'utf8');
     let output = '<table id="logTable"><tr><th>Date</th><th>Time</th><th>Project</th><th>Session</th></tr>';
     data = data.split('\n');
     data.shift();
@@ -187,11 +198,22 @@ function makeLogs(file) {
     return output;
 };
 
-makeFileSelectButtons();
+try {
+    console.log(logPath);
+} catch {
+    console.log('whopper whopper whopper')
+}
+
+try {
+    makeFileSelectButtons()
+} catch {
+    console.log('get fucked')
+}
 
 
 // Hide and show menu function
 function showOrHideMenu() {
+    makeFileSelectButtons();
     if (saveMenu.style.visibility == "hidden") {
         saveMenu.style.visibility='visible';
     } else {

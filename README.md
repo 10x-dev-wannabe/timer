@@ -3,7 +3,7 @@ Packaged app:<br>
 .deb: https://mega.nz/file/JK9DUDBC#PLl4JSM7zqhh6nMgmRwn0GPrFJBGdaaElxDPXuqJoIQ <br>
 .rpm: https://mega.nz/file/Qbkm0IjY#jvf6z9av8Tu3J5oxooXA2Fmyjr-x89VxHVoHMYD7umg <br>
 WARNING: for now the packaged app makes a new data directory in whatever is the current working directory.<br>
-If you run the app in ~/Downloads it will create a ~/Downloads/data/ dir. I will fix this asap.<br>
+If you run the app in ~/Downloads it will create a ~/Downloads/data/ dir. I will fix this asap.<br> 
 <br>
 If you want to run the program in dev mode, install node.js and npm on your machine<br>
 inside the timer directory run:

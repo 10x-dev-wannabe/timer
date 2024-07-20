@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require('electron');
-const { globalShortcut } = require('electron');
+const { app, BrowserWindow, ipcRenderer } = require('electron');
+//const { globalShortcut } = require('electron');
 
 
 const createWindow = () => {
@@ -12,7 +12,10 @@ const createWindow = () => {
     },
     icon: 'src/timerIcon.png'
   })
-
+  //send save dir path to render process
+  win.webContents.on('did-finish-load', ()=>{
+    win.webContents.send('whomp', app.getPath('userData'));
+  });
   win.loadFile('src/index.html')
 }
 
@@ -20,11 +23,14 @@ app.whenReady().then(() => {
   createWindow()
 })
 
+
 app.on('window-all-closed', () => { 
   if (process.platform !== 'darwin') { 
     app.quit() 
   } 
 })
+
+
 
 /*
 app.on('browser-window-focus', function () {
