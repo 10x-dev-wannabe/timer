@@ -3,12 +3,7 @@ const {electron, ipcRenderer} = require('electron');
 const path = require('path')
 const fs = require('fs');
 
-console.log(1)
-ipcRenderer.on('whomp', (evt, message) => {
-    logPath = `${message}/data/`;
-    console.log(logPath);
-})
-console.log(2)
+
 
 
 let timerIsLive = false;
@@ -94,6 +89,13 @@ function startAndStopFunction() {
 //SAVE FILES AND MENU FUNCTIONS//
 //-----------------------------//
 
+// Get path to logs
+ipcRenderer.on('whomp', (evt, message) => {
+    logPath = `${message}/data/`;
+    console.log('log path is:');
+    console.log(logPath);
+})
+
 // Function that hanles the save files
 function saveTimeFunction(t) {
     let filePath = `${logPath}${fileName}`;
@@ -144,6 +146,7 @@ function deleteFileFunction() {
 
 // Make save file buttons
 function makeFileSelectButtons() {
+    // Make data dir if it does not exist
     if (!fs.existsSync(logPath)){
         fs.mkdirSync(logPath);
     }
@@ -197,18 +200,6 @@ function makeLogs(file) {
     output += "</table>";
     return output;
 };
-
-try {
-    console.log(logPath);
-} catch {
-    console.log('whopper whopper whopper')
-}
-
-try {
-    makeFileSelectButtons()
-} catch {
-    console.log('get fucked')
-}
 
 
 // Hide and show menu function
