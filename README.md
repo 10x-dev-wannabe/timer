@@ -24,3 +24,4 @@ reset timer     : shift + r<br>
 open menu       : shift + m<br>
 NOTE:<br>
 I know there is a more normal way of making the file select buttons, but right now I'm learning Svelte, and I plan on re-making this app with that framework. Untill then, feel free to make a pull request and fix it yourself if you so desire. Your effort would be appreciated.<br>
+**THIS PROJECT IS NO LONGER MENTAINED**
